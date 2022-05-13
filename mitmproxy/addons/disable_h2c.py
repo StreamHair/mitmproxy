@@ -24,17 +24,7 @@ class DisableH2C:
                 del f.request.headers["connection"]
             if "http2-settings" in f.request.headers:
                 del f.request.headers["http2-settings"]
-
-        is_connection_preface = (
-            f.request.method == "PRI"
-            and f.request.path == "*"
-            and f.request.http_version == "HTTP/2.0"
-        )
-        if is_connection_preface:
-            f.kill()
-            mitmproxy.ctx.log.warn(
-                "Initiating HTTP/2 connections with prior knowledge are currently not supported."
-            )
+                
 
     # Handlers
 
